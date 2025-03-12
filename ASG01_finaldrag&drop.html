@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drag & Drop</title>
+</head>
+<body>
+<style>
+    body {
+        font-family: Arial, sans-serif; text-align: center;
+    }
+
+    .container {
+       width: 100%;
+       height: 100vh;
+       background: lightblue;
+       display: flex;
+       align-items: center;
+       justify-content: space-around;
+       padding: 20px;
+    }
+    #left, #right, #left2, #right2{
+        width: 500px;
+        height: 680px;
+        margin: 20px;
+        border: 2px solid;
+        border-radius: 10px;
+    }
+    .list{
+        background: lightpink;
+        height: 60px;
+        margin: 30px;
+        color: ghostwhite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+        border-radius: 10px;
+        border: dashed;
+    }
+
+</style>
+
+<h1> ✿ Kindergarten Class Schedule ✿ </h1>
+<div class="container">
+    <div id="left">
+        <h2>Available Classes Monday𖹭</h2>
+        <div class="list" draggable="true">Bahasa Melayu📚</div>
+        <div class="list" draggable="true">Science🔍</div>
+        <div class="list" draggable="true">Art🎨</div>
+        <div class="list" draggable="true">English🧠</div>
+        <div class="list" draggable="true">Nap Time💤</div>
+        <div class="list" draggable="true">Lunch Break🍱</div>
+    </div>
+    <div id="right">
+        <h3>Monday Schedule˖ ❀ ⋆｡˚</h3>
+    </div>
+</div>
+
+<div class="container">
+    <div id="left2">
+        <h2>Available Classes Tuesday𖹭</h2>
+        <div class="list" draggable="true">Math➕</div>
+        <div class="list" draggable="true">English🧠</div>
+        <div class="list" draggable="true">Play Time⚽</div>
+        <div class="list" draggable="true">Reading📖</div>
+        <div class="list" draggable="true">Nap Time💤</div>
+        <div class="list" draggable="true">Lunch Break🍱</div>
+    </div>
+    <div id="right2">
+        <h3>Tuesday Schedule°❀.ೃ࿔*</h3>
+    </div>
+</div>
+
+<script>
+
+let lists = document.getElementsByClassName("list");
+let rightBox = document.getElementById("right");
+let leftBox = document.getElementById("left");
+let right2Box = document.getElementById("right2");
+let left2Box = document.getElementById("left2");
+
+for(list of lists){
+    list.addEventListener("dragstart", function(e){
+        let selected = e.target;
+
+        rightBox.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        rightBox.addEventListener("drop", function(e){
+            rightBox.appendChild(selected);
+            selected = null;
+        });
+
+        leftBox.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        leftBox.addEventListener("drop", function(e){
+            leftBox.appendChild(selected);
+            selected = null;
+        });
+
+        right2Box.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        right2Box.addEventListener("drop", function(e){
+            right2Box.appendChild(selected);
+            selected = null;
+        });
+
+        left2Box.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        left2Box.addEventListener("drop", function(e){
+            left2Box.appendChild(selected);
+            selected = null;
+        });
+    })
+}
+
+</script>
+
+</body>
+</html>
