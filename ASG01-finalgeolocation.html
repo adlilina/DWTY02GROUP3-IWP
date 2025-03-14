@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEOLOCATION</title>
+    
+    <!-- Link to Leaflet's CSS file -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <style>
+        body {
+            background-image: url(https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg?cs=srgb&dl=pexels-mdsnmdsnmdsn-1831234.jpg&fm=jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center center;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            font-size: 50px;
+            color: salmon;
+            background-color: white;
+            padding: 5px;
+        }
+
+        h2 {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            font-size: 30px;
+            color: salmon;          
+        }
+
+        /* Styling for the map container */
+        #map {
+            border: 1px solid;
+            height: 500px; /* Set the height of the map */
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <h1>GEOLOCATION</h1>
+    <h2>These are the locations of the few kindergartens nearby the area.</h2>
+
+    <!-- Single map container -->
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+    // Function to initialize the map
+    function initMap() {
+        var map = L.map('map').setView([4.959329620538358, 114.9406006633257], 13); // Centering map on one of the locations
+
+        // Set the tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add markers to the map
+        L.marker([4.959329620538358, 114.9406006633257]).addTo(map).bindPopup("<b>Jigsaw Primary School</b>");
+        L.marker([4.969616890368426, 114.94749387564111]).addTo(map).bindPopup("<b>Sekolah Tunas Jaya PGGMB Lambak</b>");
+        L.marker([4.950950988653299, 114.95511434911135]).addTo(map).bindPopup("<b>DES School</b>");
+        L.marker([4.935880587031701, 114.94942224937091]).addTo(map).bindPopup("<b>Learning Tree School</b>");
+        L.marker([4.976846809192033, 114.98245180908516]).addTo(map).bindPopup("<b>Tinkerbell School</b>");
+        L.marker([4.941238377570728, 114.96508724652378]).addTo(map).bindPopup("<b>Stella's School</b>");
+
+        // Get the user's current location and add a marker
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var userLat = position.coords.latitude;
+                var userLon = position.coords.longitude;
+
+                // Add a marker for the user's location
+                L.marker([userLat, userLon]).addTo(map)
+                    .bindPopup("You are here!")
+                    .openPopup();
+
+                // Optionally, you can set the map view to the user's location
+                map.setView([userLat, userLon], 13);
+            }, function(error) {
+                alert("Error getting location: " + error.message);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    // Initialize the map
+    initMap();
+    </script>
+</body>
+</html>
