@@ -124,6 +124,7 @@ header nav a:hover::before {
     height: 88%;
     animation: to_left 1s ease forwards 1.1s;
     z-index: -1;
+}
 /* Fixed Keyframe Animations */
 @keyframes to_bottom {
     0% {
@@ -185,25 +186,6 @@ header nav a:hover::before {
     </div>
   </section>
     <img class="img" src="https://img.freepik.com/free-vector/hand-drawn-flat-people-hobbies_52683-70930.jpg" alt="images">
-
-<script type="text/javascript">
-    const express = require("express");
-const app = express();
-
-app.use(express.static("public")); // Serve static files
-
-app.get("/events", (req, res) => {
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-cache");
-    res.setHeader("Connection", "keep-alive");
-
-    setInterval(() => {
-        res.write(`data: ${new Date().toLocaleTimeString()}\n\n`);
-    }, 3000);
-});
-
-app.listen(3000, () => console.log("SSE Server running on port 3000"));
-</script>
 
 </body>
 </html>
