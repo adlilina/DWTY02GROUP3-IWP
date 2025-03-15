@@ -9,10 +9,11 @@
 if(typeof(EventSource) !== "undefined") {
   var source = new EventSource("https://lms.pb.edu.bn/wy2301/sse.php");
 
-  const filterKeywords = ["#GROUP04"]
-
   source.onmessage = function(event) {
+    // Check if the message contains "GROUP03"
+    if (event.data.includes("GROUP03")){
     document.getElementById("result").innerHTML += event.data + "<br>";
+    }
   };
 } else {
   document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
