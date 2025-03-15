@@ -6,7 +6,8 @@
     <title>GEOLOCATION</title>
     
     <!-- Link to Leaflet's CSS file -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+
     
     <style>
         body {
@@ -36,7 +37,8 @@
         /* styling for the map container */
         #map {
             border: 5px solid white;
-            height: 500px; /*  height of the map */
+            height: 500px; /* height of the map */
+            width: 100%; /* Making sure the map container stretches across the screen */
             margin: 20px auto;
         }
     </style>
@@ -53,6 +55,7 @@
 
     <!-- link to Leaflet JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
 
 
     <script>
