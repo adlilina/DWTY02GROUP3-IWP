@@ -33,10 +33,10 @@
             color: salmon;          
         }
 
-        /* Styling for the map container */
+        /* styling for the map container */
         #map {
-            border: 1px solid;
-            height: 500px; /* Set the height of the map */
+            border: 5px solid white;
+            height: 500px; /*  height of the map */
             margin: 20px auto;
         }
     </style>
@@ -48,23 +48,24 @@
     <h1>GEOLOCATION</h1>
     <h2>These are the locations of the few kindergartens nearby the area.</h2>
 
-    <!-- Single map container -->
+    <!-- map container -->
     <div id="map"></div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- link to Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
 
     <script>
     // Function to initialize the map
     function initMap() {
         var map = L.map('map').setView([4.959329620538358, 114.9406006633257], 13); // Centering map on one of the locations
 
-        // Set the tile layer
+        //  tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Add markers to the map
+        // adding markers to the map
         L.marker([4.959329620538358, 114.9406006633257]).addTo(map).bindPopup("<b>Jigsaw Primary School</b>");
         L.marker([4.969616890368426, 114.94749387564111]).addTo(map).bindPopup("<b>Sekolah Tunas Jaya PGGMB Lambak</b>");
         L.marker([4.950950988653299, 114.95511434911135]).addTo(map).bindPopup("<b>DES School</b>");
@@ -72,7 +73,7 @@
         L.marker([4.976846809192033, 114.98245180908516]).addTo(map).bindPopup("<b>Tinkerbell School</b>");
         L.marker([4.941238377570728, 114.96508724652378]).addTo(map).bindPopup("<b>Stella's School</b>");
 
-        // Get the user's current location and add a marker
+        // getting user's current location and add a marker
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var userLat = position.coords.latitude;
@@ -93,8 +94,12 @@
         }
     }
 
-    // Initialize the map
-    initMap();
+    
+    // making sure the map actually loads
+    window.onload = function() {
+        initMap();
+    };
     </script>
 </body>
 </html>
+
