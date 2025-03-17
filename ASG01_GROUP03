@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<!-- ANIMATION -->
+<!-- REFERENCE :
+(1)Reference : Magic Code, Retrieved March 10, 2025, Animated Nature website using Html & Css Only || How to create a website using Html [Video]. YouTube. https://www.youtube.com/watch?v=Tdzs82sDhZA
+ -->
+
+<style type="text/css">
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+#bodyanim {
+    overflow-x: hidden;
+}
+.home {
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    padding: 50px 80px;
+    z-index: 99;
+    animation: to_bottom 1s ease forwards 1.1s;
+    background-color: white;
+}
+header nav a {
+    font-size: 24px;
+    color: black;
+    position: relative;
+    margin-left: 70px;
+}
+header nav a::before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    background-color: black;
+    width: 100%;
+    height: 2.5px;
+    transform: scaleX(0);
+    transition: 0.3s;
+}
+header nav a:hover::before {
+    transform: scaleX(1);
+}
+.text-box {
+    width: 50%;
+    color: black;
+    margin-left: 50px;
+    text-align: left;
+}
+.text-box h1 {
+    font-size: 60px;
+    animation: to_right 1s ease forwards 0.8s;
+}
+.text-box h1:nth-child(2) {
+    animation-delay: 0.9s;
+}
+.text-box span {
+    color: salmon;
+}
+.text-box p {
+    margin: 35px 0;
+    font-size: 20px;
+    width: 70%;
+    color: gray;
+    animation: to_right 1s ease forwards 1s;
+}
+.btn {
+    position: relative;
+    color: white;
+    padding: 12px 30px;
+    border: 2px solid lightcoral;
+    border-radius: 35px;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    overflow: hidden;
+    animation: to_right 1s ease forwards 1.1s;
+}
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: pink;
+    z-index: -1;
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: 0.3s;
+}
+.btn:hover::before {
+    transform: scaleX(0);
+}
+.btn:hover {
+    color: black;
+}
+.logo {
+    position: absolute;
+    left: 5px;
+    top: 0;
+    height: 100%;
+}
+.img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 88%;
+    animation: to_left 1s ease forwards 1.1s;
+    z-index: -1;
+}
+/* Fixed Keyframe Animations */
+@keyframes to_bottom {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes to_right {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes to_left {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.text-box * {
+    opacity: 0;
+}
+.text-box span {
+    opacity: 1;
+}
+
+</style>
+<body id="bodyanim">
+  <header>
+    <h1><img class="logo" src="https://www.zarla.com/images/zarla-kinder-care-1x1-2400x2400-20230802-m4p9j67dfdwxhxy8hcfj.png?crop=1:1,smart&width=250&dpr=2" alt="kindergarten-logo"></h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+  <section class="home">
+      <div class="text-box">
+      <h1>Tiny Hands</h1>
+      <h1>Big <span>Dreams!</span></h1>
+      <p>The kindergarten was created to provide essential learning experiences, fostering development across all areas.</p>
+      <button class="btn" type="button">Sign Up</button>
+    </div>
+  </section>
+    <img class="img" src="https://img.freepik.com/free-vector/hand-drawn-flat-people-hobbies_52683-70930.jpg" alt="images">
+</body>
+
+
+<!-- DRAG AND DROP -->
+<!-- REFERENCE :
+(1)Reference : GreatStack, Retrieved March 12, 2025, How to create drag & drop using HTML CSS and JavaScript | Drag and drop in JavaScript [Video]. YouTube. https://www.youtube.com/watch?v=4AHot187Lj0
+ -->
+
+    <style>
+    .bodydnd {
+        font-family: 'Poppins', sans-serif;
+            text-align: center;
+            font-size: 25px;
+            background-color: pink;
+            color: black;
+            padding: 5px;
+            border-radius: 10px;
+    }
+    .container {
+       width: 100%;
+       height: 100vh;
+       background: lightblue;
+       display: flex;
+       align-items: center;
+       justify-content: space-around;
+       padding: 20px;
+    }
+    #left, #right, #left2, #right2{
+        width: 500px;
+        height: 680px;
+        margin: 20px;
+        border: 2px solid;
+        border-radius: 10px;
+    }
+    .list{
+        background: lightpink;
+        height: 60px;
+        margin: 30px;
+        color: ghostwhite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+        border-radius: 10px;
+        border: dashed;
+    }
+
+</style>
+
+<body>
+<h1 class="bodydnd"> ✿ Kindergarten Class Schedule ✿ </h1>
+<div class="container">
+    <div id="left">
+        <h2 class="bodydnd">Available Classes Monday𖹭</h2>
+        <div class="list" draggable="true">Bahasa Melayu📚</div>
+        <div class="list" draggable="true">Science🔍</div>
+        <div class="list" draggable="true">Art🎨</div>
+        <div class="list" draggable="true">English🧠</div>
+        <div class="list" draggable="true">Nap Time💤</div>
+        <div class="list" draggable="true">Lunch Break🍱</div>
+    </div>
+    <div id="right">
+        <h3 class="bodydnd">Monday Schedule˖ ❀ ⋆｡˚</h3>
+    </div>
+</div>
+<div class="container">
+    <div id="left2">
+        <h2 class="bodydnd">Available Classes Tuesday𖹭</h2>
+        <div class="list" draggable="true">Math➕</div>
+        <div class="list" draggable="true">English🧠</div>
+        <div class="list" draggable="true">Play Time⚽</div>
+        <div class="list" draggable="true">Reading📖</div>
+        <div class="list" draggable="true">Nap Time💤</div>
+        <div class="list" draggable="true">Lunch Break🍱</div>
+    </div>
+    <div id="right2">
+        <h3 class="bodydnd">Tuesday Schedule°❀.ೃ࿔*</h3>
+    </div>
+</div>
+<script>
+let lists = document.getElementsByClassName("list");
+let rightBox = document.getElementById("right");
+let leftBox = document.getElementById("left");
+let right2Box = document.getElementById("right2");
+let left2Box = document.getElementById("left2");
+
+for(list of lists){
+    list.addEventListener("dragstart", function(e){
+        let selected = e.target;
+
+        rightBox.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        rightBox.addEventListener("drop", function(e){
+            rightBox.appendChild(selected);
+            selected = null;
+        });
+
+        leftBox.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        leftBox.addEventListener("drop", function(e){
+            leftBox.appendChild(selected);
+            selected = null;
+        });
+
+        right2Box.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        right2Box.addEventListener("drop", function(e){
+            right2Box.appendChild(selected);
+            selected = null;
+        });
+
+        left2Box.addEventListener("dragover", function(e){
+            e.preventDefault();
+        });
+        left2Box.addEventListener("drop", function(e){
+            left2Box.appendChild(selected);
+            selected = null;
+        });
+    })
+}
+</script>
+</body>
+
+
+<!-- GEOLOCATION -->
+<!-- REFERENCE :
+(1) Leaflet, Quick Start Guide, Retrieved March 12, 2025, from https://leafletjs.com/examples/quick-start/
+(2) CSS Fonts, Retrieved March 12, 2025, from https://www.w3schools.com/css/css_font.asp
+-->
+
+    <!-- Link to Leaflet's CSS file -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        .bodygeo {
+            background-image: url(https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg?cs=srgb&dl=pexels-mdsnmdsnmdsn-1831234.jpg&fm=jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center center;
+            background-color: #f0f0f0;
+        }
+
+        .h1geo {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            font-size: 50px;
+            color: salmon;
+            background-color: white;
+            padding: 5px;
+        }
+
+        .h2geo {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            font-size: 30px;
+            color: salmon;          
+        }
+
+        /* Styling for the map container */
+        #map {
+            border: 5px solid white;
+            height: 500px; /* Set the height of the map */
+            margin: 0px auto;
+        }
+    </style>
+<body>
+    <div></div>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <h1 class="h1geo bodygeo">GEOLOCATION</h1>
+    <h2 class="h2geo bodygeo">These are the locations of the few kindergartens nearby the area.</h2>
+
+    <!-- Single map container -->
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+
+    <script>
+    // Function to initialize the map
+    function initMap() {
+        var map = L.map('map').setView([4.959329620538358, 114.9406006633257], 13); // Centering map on one of the locations
+
+        // Set the tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add markers to the map
+        L.marker([4.959329620538358, 114.9406006633257]).addTo(map).bindPopup("<b>Jigsaw Primary School</b>");
+        L.marker([4.969616890368426, 114.94749387564111]).addTo(map).bindPopup("<b>Sekolah Tunas Jaya PGGMB Lambak</b>");
+        L.marker([4.950950988653299, 114.95511434911135]).addTo(map).bindPopup("<b>DES School</b>");
+        L.marker([4.935880587031701, 114.94942224937091]).addTo(map).bindPopup("<b>Learning Tree School</b>");
+        L.marker([4.976846809192033, 114.98245180908516]).addTo(map).bindPopup("<b>Tinkerbell School</b>");
+        L.marker([4.941238377570728, 114.96508724652378]).addTo(map).bindPopup("<b>Stella's School</b>");
+
+        // Get the user's current location and add a marker
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var userLat = position.coords.latitude;
+                var userLon = position.coords.longitude;
+
+                // Add a marker for the user's location
+                L.marker([userLat, userLon]).addTo(map)
+                    .bindPopup("You are here!")
+                    .openPopup();
+
+                // Optionally, you can set the map view to the user's location
+                map.setView([userLat, userLon], 13);
+            }, function(error) {
+                alert("Error getting location: " + error.message);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    // Initialize the map
+    // making sure the map actually loads
+    window.onload = function() {
+        initMap();
+    };
+    </script>
+</body>
+
+<!-- SERVER SIDE EVENTS -->
+<!-- REFERENCE :
+(1)  W3Schools.com. Retrieved March 11, 2025, https://www.w3schools.com/html/html5_serversentevents.asp
+-->
+
+<style type="text/css">
+    .box {
+            position: fixed;
+            bottom: 10px; 
+            right: 10px; 
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            width: 320px;
+            height: 300px;
+            border-radius: 15px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow-y: auto; /* Enables scrolling */
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: black;
+            border: 1px solid #ddd;
+        }
+
+        .btnsse {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .btnsse:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            max-height: 240px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .message {
+            background: #f1f1f1;
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h3>Getting server updates...</h3>
+        <div id="result"></div>
+        <button class="btnsse" onclick="startSSE()">Start Receiving Updates</button>
+    </div>
+
+    <script>
+        let eventSource = null;
+
+        function startSSE() {
+            if (eventSource) {
+                eventSource.close(); // Close existing connection
+            }
+
+            eventSource = new EventSource("https://lms.pb.edu.bn/wy2301/sse.php");
+
+            eventSource.onmessage = function(event) {
+                let message = event.data.trim();
+                console.log("RAW DATA:", message);
+
+                if (message.includes("#GROUP03")) {
+                    updateLog(message);
+                }
+            };
+
+            eventSource.onerror = function() {
+                console.error("SSE connection lost. Retrying...");
+                eventSource.close();
+                setTimeout(startSSE, 5000);
+            };
+        }
+
+        function updateLog(message) {
+            const logContainer = document.getElementById("result");
+            const newMessage = document.createElement("p");
+            newMessage.classList.add("message");
+            newMessage.textContent = message;
+
+            logContainer.appendChild(newMessage);
+            logContainer.scrollTop = logContainer.scrollHeight;
+
+            if (logContainer.children.length > 20) {
+                logContainer.removeChild(logContainer.children[0]); // Remove old logs
+            }
+        }
+
+</script>
+
+</body>
+</html>
