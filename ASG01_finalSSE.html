@@ -1,25 +1,104 @@
 <!DOCTYPE html>
 <html>
+<head>
+<style type="text/css">
+    .box {
+            position: fixed;
+            bottom: 10px; 
+            right: 10px; 
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            width: 320px;
+            height: 300px;
+            border-radius: 15px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow-y: auto; /* Enables scrolling */
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: black;
+            border: 1px solid #ddd;
+        }
+
+        .btnsse {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .btnsse:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            max-height: 240px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .message {
+            background: #f1f1f1;
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
 <body>
-
-<h1>Getting server updates</h1>
-<div id="result"></div>
-
+    <div class="box">
+        <h3>Getting server updates...</h3>
+        <div id="result"></div>
+        <button class="btnsse" onclick="startSSE()">Start Receiving Updates</button>
+    </div>
 <script>
-if(typeof(EventSource) !== "undefined") {
-  var source = new EventSource("https://lms.pb.edu.bn/wy2301/sse.php");
+        let eventSource = null;
 
-  source.onmessage = function(event) {
-    // Check if the message contains "GROUP03"
-    if (event.data.includes("GROUP03")){
-    document.getElementById("result").innerHTML += event.data + "<br>";
-    }
-  };
-} else {
-  document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
-}
+        function startSSE() {
+            if (eventSource) {
+                eventSource.close();
+            }
+
+            eventSource = new EventSource("https://lms.pb.edu.bn/wy2301/sse.php");
+
+            eventSource.onmessage = function(event) {
+                let message = event.data.trim();
+                console.log("RAW DATA:", message);
+
+                if (message.includes("#GROUP03")) {
+                    updateLog(message);
+                }
+            };
+
+            eventSource.onerror = function() {
+                console.error("SSE connection lost. Retrying...");
+                eventSource.close();
+                setTimeout(startSSE, 5000);
+            };
+        }
+
+        function updateLog(message) {
+            const logContainer = document.getElementById("result");
+            const newMessage = document.createElement("p");
+            newMessage.classList.add("message");
+            newMessage.textContent = message;
+
+            logContainer.appendChild(newMessage);
+            logContainer.scrollTop = logContainer.scrollHeight;
+
+            if (logContainer.children.length > 20) {
+                logContainer.removeChild(logContainer.children[0]);
+            }
+        }
 </script>
-
 </body>
 </html>
 
