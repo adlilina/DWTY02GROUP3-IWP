@@ -82,12 +82,12 @@
                 var userLat = position.coords.latitude;
                 var userLon = position.coords.longitude;
 
-                // Add a marker for the user's location
+                // adding marker for the user's location
                 L.marker([userLat, userLon]).addTo(map)
                     .bindPopup("You are here!")
                     .openPopup();
 
-                // Optionally, you can set the map view to the user's location
+                //  map view to the user's location
                 map.setView([userLat, userLon], 13);
             }, function(error) {
                 alert("Error getting location: " + error.message);
